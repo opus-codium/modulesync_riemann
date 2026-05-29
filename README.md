@@ -1,3 +1,3 @@
 # modulesync_riemann
 
-A modulesync config to manage our riemann tools.
+A [modulesync](https://github.com/voxpupuli/modulesync) config to manage our riemann tools.
