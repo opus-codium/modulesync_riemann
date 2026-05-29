@@ -1,0 +1,25 @@
+name: noop run
+
+on:
+  workflow_dispatch: {}
+  pull_request: {}
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    name: Run msync update --noop against all tools
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+          bundler-cache: true
+      - name: Run msync update --noop
+        run: bundle exec msync update --noop --git-base=https://github.com/

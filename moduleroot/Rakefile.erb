@@ -1,0 +1,24 @@
+# Managed by modulesync - DO NOT EDIT
+# See: https://github.com/opus-codium/modulesync_riemann
+
+# frozen_string_literal: true
+
+require "riemann/tools/<%= @metadata[:module_name].delete_prefix("riemann-").gsub("-", "_") %>/version"
+
+require "bundler/gem_tasks"
+require "rspec/core/rake_task"
+
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :spec
+
+require "github_changelog_generator/task"
+
+GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+  config.user = "opus-codium"
+  config.project = "<%= @metadata[:module_name] %>"
+  config.exclude_labels = ["dependencies", "skip-changelog"]
+  <%- require "active_support/core_ext/string/inflections" -%>
+  config.future_release = Riemann::Tools::<%= @metadata[:module_name].delete_prefix("riemann-").gsub("-", "_").classify %>::VERSION
+  config.since_tag = "v1.0.0"
+end

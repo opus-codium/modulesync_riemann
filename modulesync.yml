@@ -1,0 +1,5 @@
+---
+git_base: 'git@github.com:'
+namespace: opus-codium
+branch: modulesync
+message: "Update from Opus-Codium modulesync_riemann"
